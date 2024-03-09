@@ -23,8 +23,8 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    @Transactional
-    public void delete(Integer id) {
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Integer id) throws Exception{
         deptMapper.deleteById(id);
         deptMapper.deleteEmpByDeptId(id);
     }
