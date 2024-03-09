@@ -1,7 +1,11 @@
 package com.itheima.tlias.service.impl;
 
+import com.itheima.tlias.mapper.DeptLogMapper;
 import com.itheima.tlias.mapper.DeptMapper;
+import com.itheima.tlias.mapper.EmpMapper;
 import com.itheima.tlias.pojo.Dept;
+import com.itheima.tlias.pojo.DeptLog;
+import com.itheima.tlias.service.DeptLogService;
 import com.itheima.tlias.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,12 @@ public class DeptServiceImpl implements DeptService {
     // 注入 Mapper对象，以便Service层调用Mapper方法。
     @Autowired
     private DeptMapper deptMapper;
+    @Autowired
+    private EmpMapper empMapper;
+    @Autowired
+    private DeptLogService deptLogService;
+    // -----------------------------------------------------
+
 
     @Override
     public List<Dept> list() {
@@ -25,8 +35,15 @@ public class DeptServiceImpl implements DeptService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void delete(Integer id) throws Exception{
-        deptMapper.deleteById(id);
-        deptMapper.deleteEmpByDeptId(id);
+        try{
+            deptMapper.deleteById(id);       //根据ID删除部门数据
+            empMapper.deleteEmpByDeptId(id); //根据部门ID删除该部门下的员工
+        } finally {
+            DeptLog deptLog = new DeptLog();
+            deptLog.setCreateTime(LocalDateTime.now());
+            deptLog.setDescription("执行了 解散部门的操作，此次解散的是" + id + "号部门");
+            deptLogService.insert(deptLog);
+        }
     }
 
     @Override

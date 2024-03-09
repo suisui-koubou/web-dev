@@ -22,10 +22,4 @@ public interface DeptMapper {
 
     @Update("update dept set name = #{name} where id = #{id}")
     void update(Dept dept);
-
-    /**
-     * 根据部门数据删除员工
-     */
-    @Delete("delete from emp where dept_id = #(deptId)")
-    void deleteEmpByDeptId(Integer deptId);
 }
