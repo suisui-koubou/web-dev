@@ -1,5 +1,6 @@
 package com.itheima.tlias.controller;
 
+import com.itheima.tlias.anno.TliasLog;
 import com.itheima.tlias.pojo.Dept;
 import com.itheima.tlias.pojo.Result;
 import com.itheima.tlias.service.DeptService;
@@ -54,6 +55,7 @@ public class DeptController {
 
 
     // 删除部门
+    @TliasLog
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Integer id) throws Exception {
         log.info("根据id删除部门:{}", id);
@@ -62,6 +64,7 @@ public class DeptController {
     }
 
     // 新增部门
+    @TliasLog
     @PostMapping
     public Result add(@RequestBody Dept dept){
         log.info("新增部门: {}", dept);

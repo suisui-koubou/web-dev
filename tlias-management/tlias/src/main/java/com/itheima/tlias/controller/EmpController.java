@@ -1,5 +1,6 @@
 package com.itheima.tlias.controller;
 
+import com.itheima.tlias.anno.TliasLog;
 import com.itheima.tlias.pojo.Emp;
 import com.itheima.tlias.pojo.PageBean;
 import com.itheima.tlias.pojo.Result;
@@ -38,6 +39,7 @@ public class EmpController {
     }
 
 
+    @TliasLog
     @DeleteMapping("/{ids}")
     public Result delete(@PathVariable List<Integer> ids){
         log.info("批量删除操作，ids:{}", ids);
@@ -45,6 +47,7 @@ public class EmpController {
         return Result.success();
     }
 
+    @TliasLog
     @PostMapping
     public Result save(@RequestBody Emp emp){    // Emp是封装好的员工数据
         log.info("新增员工, emp:{}", emp);
@@ -65,6 +68,7 @@ public class EmpController {
     /**
      * 更新员工信息
      */
+    @TliasLog
     @PutMapping
     public Result update(@RequestBody Emp emp){
         log.info("更新员工信息: {}", emp);
