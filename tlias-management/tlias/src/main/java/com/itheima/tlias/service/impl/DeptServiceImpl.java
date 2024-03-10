@@ -1,5 +1,6 @@
 package com.itheima.tlias.service.impl;
 
+import com.itheima.tlias.aop.MyFirstAnnotation;
 import com.itheima.tlias.mapper.DeptLogMapper;
 import com.itheima.tlias.mapper.DeptMapper;
 import com.itheima.tlias.mapper.EmpMapper;
@@ -27,6 +28,7 @@ public class DeptServiceImpl implements DeptService {
     // -----------------------------------------------------
 
 
+    @MyFirstAnnotation // 我创建的注解
     @Override
     public List<Dept> list() {
         return deptMapper.list();
