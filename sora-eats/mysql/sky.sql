@@ -1,6 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `sky_take_out` ;
-USE `sky_take_out`;
-
 DROP TABLE IF EXISTS `address_book`;
 CREATE TABLE `address_book` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
